@@ -1,0 +1,106 @@
+\begin{corollary}
+    Let $G$ be a finite group and $A$ be a $G$-module
+    which is also a $\Z[1/m]$-module where $m = |G|$.
+    Then $H^i(G, A) = 0$ for all $i > 0$.
+\end{corollary}
+
+\begin{corollary}
+    Let $G$ be a finite group.
+    Then $H^0(G, \Z) = \Z, H^1(G, \Z) = 0$,
+    and $H^i(G, \Z)= H^{i-1}(G, \Q/\Z)$ for all $i > 1$.
+\end{corollary}
+\begin{proof}
+    We have an exact sequence of trivial $G$-modules $0 \to \Z \to \Q \to \Q/\Z \to 0$.
+    It gives a long exact sequence
+    \[
+        0 \to H^0(G, \Z) \to H^0(G, \Q) \to H^0(G, \Q/\Z) \to H^1(G, \Z) \to H^1(G, \Q) \to \cdots
+    \]
+    Since $H^i(G, \Q) = 0$ for all $i > 0$ by the previous corollary,
+    we are done.
+\end{proof}
+
+\newpage
+\section{Bar Resolution}
+Let $G$ be any discrete group.
+We want to construct a free resolution of $\Z$ as $\Z[G]$-modules.
+We set $B_{-1}:= \Z$ and the $0$-th power of $G$ is the trivial group.
+For $n \geq 0$, we define $B_n$ to be the free $\Z[G]$-module on $G^n$.
+We define the following maps $d_n: B_n \to B_{n-1}$ for $n \geq 0$
+(we want the maps to be boundary maps):
+\begin{align*}
+    d_0 &= \epsilon \quad(\text{augmentation map}),\\
+    d_n &: B_n \to B_{n-1} \text{ which is defined as}\\
+    \quad &d_n= \sum_{i=0}^n (-1)^i d_n^i,\\
+    &\text{where } d_n^0([g_1|\cdots|g_n]) = g_1 \cdot [g_2|\cdots|g_n],\\
+    &\quad\qquad d_n^i([g_1|\cdots|g_n]) = [g_1|\cdots|g_ig_{i+1}|\cdots|g_n] \text{ for } 1 \leq i \leq n-1,\\
+    &\quad\qquad d_n^n([g_1|\cdots|g_n]) = [g_1|\cdots|g_{n-1}].
+\end{align*}
+
+The maps $d_n$ are boundary maps because of their simplicial structure (look at the Dold–Kan correspondence).
+
+\begin{theorem}
+    The sequence $B_\bullet$ is exact.
+\end{theorem}
+\begin{proof}
+    We shall show that $\cdots \to B_n \xrightarrow{d_n} B_{n-1} \to \cdots \to B_0 \xrightarrow{d_0} B_{-1} \to 0$ is exact
+    by constructing a null-homotopy.
+    We want to construct maps $h_n: B_n \to B_{n+1}$ such that $d_{n+1} \circ h_n + h_{n-1} \circ d_n = \text{id}_{B_n}$ for all $n \geq -1$.
+    Define $h_n: B_n \to B_{n+1}$ as
+    \[
+        h_n(g_0\cdot [g_1|\cdots|g_n]) = [g_0|g_1|\cdots|g_n].
+    \]
+    For $n=-1$, it is clear that $d_0 \circ h_{-1} = \text{id}_{B_{-1}}$.
+    Then when $n \geq 1$, we have
+    \begin{align*}
+        d_{n+1} \circ h_n([g_1|\cdots|g_n]) &= d_{n+1}([e|g_1|\cdots|g_n])\\
+        &= [g_1|\cdots|g_n]-[g_1|\cdots|g_n] \\
+        &\quad + \sum_{i=1}^{n-1} (-1)^{i+1} [e|g_1|\cdots|g_ig_{i+1}|\cdots|g_n] + (-1)^{n+1} [e|\cdots|g_{n-1}]
+    \end{align*}
+    and
+    \begin{align*}
+        h_{n-1} \circ d_n([g_1|\cdots|g_n]) &= h_{n-1}(g_1 \cdot [g_2|\cdots|g_n]\\
+        &\quad + \sum_{i=1}^{n-1} (-1)^i [g_1|\cdots|g_ig_{i+1}|\cdots|g_n] + (-1)^n [g_1|\cdots|g_{n-1}])\\
+        &= [g_1|\cdots|g_n] + \sum_{i=1}^{n-1} (-1)^i [e|g_1|\cdots|g_ig_{i+1}|\cdots|g_n]\\
+        &\quad + (-1)^n [g_1|\cdots|g_{n-1}].
+    \end{align*}
+    Therefore, we have
+    \begin{align*}
+        d_{n+1} \circ h_n([g_1|\cdots|g_n]) + h_{n-1} \circ d_n([g_1|\cdots|g_n]) &= [g_1|\cdots|g_n].
+    \end{align*}
+    For $n=0$, we have
+    \begin{align*}
+        d_1 \circ h_0([g_1]) &= d_1([e|g_1]) = [g_1]-[e],\\
+        h_{-1} \circ d_0([g_1]) &= h_{-1}(\epsilon([g_1])) = h_{-1}([e]) = [e].
+    \end{align*}
+    Therefore, we have $d_{n+1} \circ h_n + h_{n-1} \circ d_n = \text{id}_{B_n}$ for all $n \geq -1$.
+\end{proof}
+
+By the previous theorem, we have a free resolution of $\Z$ as $\Z[G]$-modules.
+This is called the \textit{bar resolution} of $\Z$ as $\Z[G]$-modules
+invented by Eilenberg and MacLane.
+
+We also observe that $\Hom_{\Z[G]}(B_n, B_{n-1}) \cong \Hom_{\mathsf{Set}}(G^n, B_{n-1})$
+because $B_n$ is a free $\Z[G]$-module on $G^n$.
+
+Let's consider a special case: $B_2 \xrightarrow{d_2} B_1 \xrightarrow{d_1} B_0 \xrightarrow{d_0} B_{-1} \to 0$.
+Let $A$ be a $G$-module.
+Then we have 
+\begin{align*}
+    H^i(G, A) = H^i(\Hom_{\mathsf{Set}}(G^\bullet, A)).
+\end{align*}
+
+For $G^0 = \{e\}$, we have $\Hom_{\mathsf{Set}}(G^0, A) \cong A$.
+We consider the pullback map $d_1^*: \Hom_{\mathsf{Set}}(G^0, A) \to \Hom_{\mathsf{Set}}(G^1, A)$
+of $d_1$ which is given by $d^1(g) = g-1$.
+So we have $H^0(G, A) = \ker(d_1^*) = \{a \in A \ : \ g\cdot a - a = 0 \} = A^G$.
+
+We also have $d_2(f)(g_1, g_2) = g_1\cdot f(g_2) - f(g_1g_2) + f(g_1)$.
+Hence $Z^1(G, A) = \ker(d_2^*) = \{f: G \to A \ : \ g_1\cdot f(g_2) - f(g_1g_2) + f(g_1) = 0\}$.
+Such functions $f$ are called \textit{crossed homomorphisms}.
+In addition we have $B^1(G, A) = \im(d_1^*) = \{f: G \to A \ : \ f(g) = g\cdot a - a \text{ for some } a \in A\}$.
+Any map in the boundary is also a crossed homomorphism because
+\[
+    g_1\cdot f(g_2) - f(g_1g_2) + f(g_1) = g_1\cdot (g_2\cdot a - a) - (g_1g_2\cdot a - a) + (g_1\cdot a - a) = 0.
+\]
+And such maps are called \textit{principal crossed homomorphisms}.
+And $H^1(G, A) = Z^1(G, A) / B^1(G, A)$ is the group of crossed homomorphisms modulo principal crossed homomorphisms.

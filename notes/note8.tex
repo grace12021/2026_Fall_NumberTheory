@@ -1,0 +1,41 @@
+\newpage
+Let $\alpha: R \to S$ be a ring homomorphism
+such that $S$ is a free-$R$-module of rank $n<\infty$.
+Let $M, P$ be $S$-modules.
+Then we have the corestriction map
+\(
+    \Cores_R^S: \ext_R^i(P, M) \to \ext_S^i(P, M)
+\)
+and the restriction map
+\(
+    \Res_R^S: \ext_S^i(P, M) \to \ext_R^i(P, M).
+\)
+
+\begin{proposition}
+    The composition $\Cores_R^S \circ \Res_R^S$ is multiplication by $n$.
+\end{proposition}
+\begin{proof}
+    First, we start with the case $i=0$.
+    We have the following diagram:
+    \[
+        \begin{tikzcd}
+            \Hom_S(P, M) \arrow[r, hook, "\Res_R^S"] & \Hom_R(P, M) \arrow[r, "\sim"] &\Hom_S(P\underset{R}{\otimes}S, M)\arrow[d, "\sim" sloped]\\
+            \Hom_S(P, M) &\arrow[l, "\Delta^*"'] \bigoplus \Hom_S(Pe_i, M) & \arrow[l, "\sim"'] \Hom_S(P^n, M)
+        \end{tikzcd}
+    \]
+    where $e_1, \ldots, e_n$ is a basis of $S$ as a free-$R$-module.
+    We have $\Delta^*(f_1, \ldots, f_n) = \sum_{i=1}^n f_i$.
+    We observe that the composition gives $f \mapsto (f, \ldots, f) \mapsto \sum_{i=1}^n f = nf$.
+
+    It gives a natural transformation $\eta: \Hom_S(P, -) \to \Hom_S(P, -)$
+    on $S$-$\Mod$ such that $\eta(M)$ is multiplication by $n$.
+    Since $\Hom_S(P, -)$ is a left exact functor, we can extend $\eta$ to a natural transformation
+    \(
+        \eta^i: \ext_S^i(P, -) \to \ext_S^i(P, -)
+    \)
+    for all $i \ge 0$, and it must be multiplication by $n$ as well.
+\end{proof}
+
+\begin{corollary}
+    Let $G$ be a discrete group and 
+\end{corollary}

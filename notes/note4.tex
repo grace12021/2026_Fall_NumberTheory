@@ -1,0 +1,89 @@
+\begin{corollary}
+    Let $A$ be a trivial $G$-module. Then, we have
+    \begin{align*}
+        H^0(G,A) &\cong A,\\
+        H^1(G,A) &\cong \Hom_{\mathsf{group}}(G,A).
+    \end{align*}
+\end{corollary}
+\begin{proof}
+    We have $Z^1(G, A) = \Hom_{\mathsf{group}}(G,A)$ and $B^1(G,A) = 0$ since $A$ is a trivial $G$-module.
+\end{proof}
+
+We already looked at the case of $A= \Z$ of the following corollary.
+\begin{corollary}
+    Suppose $G$ is a finite group and $A$ is a torsion-free trivial $G$-module.
+    Then, we have $H^1(G,A) = 0$.
+\end{corollary}
+
+
+\begin{theorem}
+    Suppose $G$ is a finite group of order $m$, and let $A$ be a $G$-module.
+    Then $H^n(G,A)$ is annihilated by $m$ for all $n>0$,
+    i.e., $H^n(G, A)$ is a $\Z/m\Z$-module for all $n>0$.
+\end{theorem}
+\begin{proof}
+    Our strategy to prove this is to use null-homotopy again.
+    Let $B_\bullet\overset{\epsilon}{\longrightarrow} \Z$ be the bar resolution of $\Z$.
+    Let's consider the map of the complexes $B_\bullet \to B_\bullet$ given by
+    \begin{figure}[ht]
+        \centering
+        \begin{tikzcd}
+            \cdots \arrow[r] & B_2 \arrow[r] \arrow[d, "m"] & B_1 \arrow[r] \arrow[d, "m"] & B_0 \arrow[d, "m-N"]\\
+            \cdots \arrow[r] & B_2 \arrow[r] & B_1 \arrow[r] & B_0
+        \end{tikzcd}
+    \end{figure}
+
+    \noindent
+    where $N = \sum_{g\in G} g$ is the norm element.
+    We want to show that this is null-homotopic in positive degrees.
+    Let $\nu_n: B_n \to B_{n+1}$ be the map given by
+    \[
+        \nu_n([g_1|g_2|\cdots|g_n]) = \epsilon_n \sum_{g\in G} [g_1|\cdots|g_n|g]
+    \]
+    where $\epsilon_n = (-1)^{n+1}$.
+    We claim that $\nu_{n-1}\circ d_n + d_{n+1}\circ \nu_n = m$ in all positive degrees.
+    Let $\omega = [g_1|\cdots|g_n] \in B_n$.
+    Then, we have
+    \begin{align*}
+        d_{n+1}\circ \nu_n(\omega) &= \epsilon_n \sum_{g\in G} d_{n+1}([g_1|\cdots|g_n|g])\\
+        &= (-1)^{n+1} \sum_{g\in G} \left( g_1 [g_2|\cdots|g_n|g]\right)\\
+        &\quad + (-1)^{n+1} \sum_{g\in G}\left(\sum_{i=1}^{n-1} (-1)^i [g_1|\cdots|g_ig_{i+1}|\cdots|g_n|g]\right)\\
+        &\quad + (-1)^{n+1} \sum_{g\in G}\left((-1)^n [g_1|\cdots|g_ng]\right) +\sum_{g\in G}\left([g_1|\cdots|g_n]\right),
+        \\
+        \nu_{n-1}\circ d_n(\omega) &= \nu_{n-1}\left(g_1[g_2|\cdots|g_n] + \sum_{i=1}^{n-1} (-1)^i [g_1|\cdots|g_ig_{i+1}|\cdots|g_n] + (-1)^n [g_1|\cdots|g_{n-1}]\right)\\
+        &= (-1)^n \sum_{g\in G} g_1[g_2|\cdots|g_n|g] + (-1)^n \sum_{g\in G}\left(\sum_{i=1}^{n-1} (-1)^i [g_1|\cdots|g_ig_{i+1}|\cdots|g_n|g]\right)\\
+        &\quad + (-1)^n \sum_{g\in G}\left([g_1|g_2|\cdots|g_{n-1}|g]\right).
+    \end{align*}
+    We observe that
+    \begin{align*}
+        \sum_{g\in G}\left([g_1|g_2|\cdots|g_{n-1}|g]\right) = \sum_{g\in G}\left([g_1|\cdots|g_ng]\right)
+    \end{align*}
+    since $g$ runs over all elements of $G$.
+    Therefore, from the above, we have
+    \begin{align*}
+        d_{n+1}\circ \nu_n(\omega) + \nu_{n-1}\circ d_n(\omega) &= \sum_{g\in G} [g_1|\cdots|g_n] = m(\omega).
+    \end{align*}
+    For the $0$-th degree, we have
+    \[
+        d_1\circ \nu_0([]) = d_1\left(-\sum_{g\in G} [g]\right) = -\sum_{g\in G} [g] + \sum_{g\in G} [1] = m-N.
+    \]
+    Thus, $m \cdot H^n(G,A) = 0$ for all $n>0$.
+\end{proof}
+
+\begin{corollary}
+    If $A$ is $\Z[1/m]$-module, then $H^n(G,A) = 0$ for all $n>0$.
+\end{corollary}
+\begin{proof}
+    Since $A$ is a $\Z[1/m]$-module, we have $m$ is an automorphism for $A$; hence an automorphism for $H^n(G,A)$ for all $n>0$.
+    But $m \cdot H^n(G,A) = 0$ for all $n>0$ by the previous theorem.
+    Therefore, $H^n(G,A) = 0$ for all $n>0$.
+\end{proof}
+
+We continue to assume that $G$ is a finite group of order $m$.
+By averaging over $G$, we get a trivial $G$-module structure on a $\Z[1/m][G]$-module $A$.
+\begin{definition}
+    The Reynolds operator $R: A \to A^G$ is defined by
+    \[
+        R(a) = \frac{1}{m}\sum_{g\in G} g\cdot a.
+    \]
+\end{definition}
