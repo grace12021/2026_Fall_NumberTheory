@@ -37,5 +37,34 @@ and the restriction map
 \end{proof}
 
 \begin{corollary}
-    Let $G$ be a discrete group and 
+    Let $G$ be a discrete group and $H$ be a subgroup of a finite
+    index $n$.
+    Let $A \in G\text{-}\Mod$.
+    Then the composition
+    \begin{align*}
+        H^i(G, A) \xrightarrow{\Res_H^G} H^i(H, A) \xrightarrow{\Cores_H^G} H^i(G, A)
+    \end{align*}
+    is multiplication by $n = |G/H|$.
 \end{corollary}
+
+This can be interpreted as the algebraic version of a topological fact.
+Let $X$ be a connected topological space and $Y\to X$ be an $n$-sheeted covering space.
+Then the restriction map is corresponding to the pullback $p^*$ and
+the corestriction map is corresponding to the transfer map $p_!$.
+(So we sometimes call the corestriction map the transfer map.)
+Copying a class to $n$ sheets and adding them back up gives $n$ times the original class.
+
+\begin{corollary}
+    Suppose $G$ is a finite group of order $n$
+    and $A$ is a $G$-module.
+    Then $H^i(G, A)$ is annihilated by $n$ for all $i>0$.
+\end{corollary}
+\begin{proof}
+    Apply the previous corollary with the trivial subgroup $H = \{e\}$.
+    Then we observe $H^i(G, A) \to H^i(\{e\}, A) \to H^i(G, A)$ is multiplication by $n$.
+    But $H^i(\{e\}, A) = 0$ for all $i>0$, so we conclude that $H^i(G, A)$ is annihilated by $n$ for all $i>0$.
+\end{proof}
+
+Let $G$ be a discrete group and $H$ be a normal subgroup of finite index,
+and $A$ be a $G$-module.
+Then we have the inflation map, the

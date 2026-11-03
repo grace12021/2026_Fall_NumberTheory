@@ -1,0 +1,115 @@
+\newpage
+\section{Change of Groups}
+
+Suppose that $G$ is a group acting on an abelian group $A$,
+and suppose that there is a group homomorphism $\phi: G' \to G$.
+Then $\phi$ induces a $G'$-action on $A$.
+
+\begin{question}
+Any connection between $H^i(G, A)$ and $H^i(G', A)$?
+\end{question}
+
+For $i = 0$, we have $H^0(G, A) = A^G$ and $H^0(G', A) = A^{G'}$,
+and we have an inclusion $A^G \hookrightarrow A^{G'}$.
+
+\subsection{Change of Rings}
+
+We consider a more general setting as before.
+Let $\alpha: R \to S$ be a ring homomorphism and they don't have to be commutative.
+We are given $S$-modules $P, M$ and an $R$-module $N$.
+We have an $R$-linear map $h: M \to N$.
+
+\begin{theorem}
+    Given the above data,
+    there is a natural abelian group homomorphism $h_*: \ext_S^i(P, M) \to \ext_R^i(P, N)$ for all $i \ge 0$.
+    Moreover, if $R$ is commutative, then $h_*$ is an $R$-linear map.
+\end{theorem}
+\begin{proof}
+    Let $M \to I^\bullet$ be an injective resolution of $M$ as an $S$-module.
+    Let $I^\bullet \to J^\bullet$ be an injective resolution of $I^\bullet$ as an $R$-module.
+    Then we have canonically induced maps:
+    \[
+    \begin{tikzcd}
+        \Hom_S(P, M) \arrow{r} & \Hom_R(P, I^\bullet)\arrow{d}{\alpha^*}\\
+        & \Hom_R(P, I^\bullet)\arrow{d}\\
+        & \Hom_R(P, J^\bullet)
+    \end{tikzcd}
+    \]
+    hence we have $H^i(\Hom_S(P, I^\bullet))(=\ext_S^i(P, M)) \to H^i(\Hom_R(P, J^\bullet))(=\ext_R^i(P, M))$.
+    With $h: M \to N$, a map $\ext^i_R(P, M) \to \ext^i_R(P, N)$ is induced.
+    Thus we have a map $h_*: \ext_S^i(P, M) \to \ext_R^i(P, N)$ by composition.
+\end{proof}
+
+We note that $h_*$ is a compusition of $\Hom_S(P, M) \hookrightarrow \Hom_R(P, M)$
+and $h\circ (-): \Hom_R(P, M) \to \Hom_R(P, N)$ when $i=0$.
+
+\subsection{Restriction Maps}
+\begin{proposition}
+    Let $\varphi: G' \to G$ be a group homomorphism and $A$ be a $G$-module.
+    Then we have a natural map $\varphi^*: H^i(G, A) \to H^i(G', A)$ for all $i \ge 0$.
+\end{proposition}
+\begin{proof}
+    Take $R = \Z[G']$, $S = \Z[G]$, $P = \Z$, $M = A$, and $N = B$.
+    Then we have a natural map $\varphi^*: \ext^i_{\Z[G]}(\Z, A) \to \ext^i_{\Z[G']}(\Z, B)$ for all $i \ge 0$.
+\end{proof}
+
+We note that when $i=0$, we have $A^G \hookrightarrow A^{G'} \overset{h_*}{\hookrightarrow} B^{G'}$.
+
+\begin{example}[Restriction Maps]\noindent
+    \begin{enumerate}
+        \item Take $A = B$ and $h = \mathrm{id}_A$.
+        Then we have a natural map $\Res_{G'}^G: H^i(G, A) \to H^i(G', A)$ for all $i \ge 0$.
+        As we have seen, when $i=0$, we have $A^G \hookrightarrow A^{G'}$.
+        \item Take $G'$ to be a subgroup $H$ of $G$.
+        Then we get a restriction map $\Res_H^G: H^i(G, -) \to H^i(H, -)$ on $G$-modules.
+    \end{enumerate}
+\end{example}
+
+\begin{example}[Topological Interpretation of Restriction Maps]
+    
+Let $H$ be a subgroup of $G$.
+Recall from Section 1 that $H^i(G, \Z) \cong H^i_{sing}(BG, \Z)$.
+So the restriction map $\Res_H^G$ should be a map
+\[
+    H^*_{sing}(BG, \Z) \to H^*_{sing}(BH, \Z),
+\]
+and a natural way to produce such a map in topology is to pull back along a continuous map.
+
+\begin{question}
+    Is there a continuous map $BH \to BG$?
+\end{question}
+
+The tool is the universal property of $BG$ which classifies principal $G$-bundles.
+That is, for a (paracompact) space $X$,
+\[
+    [X, BG] \xrightarrow{\;\sim\;} \{\text{principal $G$-bundles over } X\}/\cong,
+    \qquad [f] \mapsto f^*EG.
+\]
+Hence to construct a map $BH \to BG$ (up to homotopy),
+it is enough to construct a principal $G$-bundle over $BH$.
+Given a principal $H$-bundle $EH \to BH$, we want to enlarge its structure group from $H$ to $G$.
+We can do this by taking the associated bundle $EH \times^H G$ with fiber $G$:
+$EH \overset{H}{\times} G \to BH$, $[e, g] \mapsto [e]$.
+
+By the universal property, there is a continuous map $\iota: BH \to BG$,
+unique up to homotopy, such that $\iota^* EG \cong EH \overset{H}{\times} G$ as principal $G$-bundles.
+Here are some remarks on this construction.
+    \begin{enumerate}
+        \item A concrete model: $G$ acts freely on the contractible space $EG$, hence so does $H$.
+        So $EG$ is also a model for $EH$, and $BH = EG/H$.
+        In this model $\iota$ is simply the quotient map
+        \[
+            BH = EG/H \longrightarrow EG/G = BG,
+        \]
+        which is a covering map with fiber $G/H$ (of degree $[G:H]$ when it is finite).
+        \item The map $\iota$ induces $\iota^*: H^*_{sing}(BG, \Z) \to H^*_{sing}(BH, \Z)$,
+        and under the identifications $H^*(G, \Z) \cong H^*_{sing}(BG, \Z)$, $H^*(H, \Z) \cong H^*_{sing}(BH, \Z)$
+        this is the restriction map $\Res_H^G$.
+        Indeed, on $\pi_1$ the map $\iota$ is the inclusion $H \hookrightarrow G$,
+        and $\Res_H^G$ is the map on cohomology induced by this group homomorphism.
+    \end{enumerate}
+\end{example}
+
+\subsection{Inflication Maps}
+Suppose that $H$ is a normal subgroup of $G$,
+so we can consider the quotient map $\pi: G \to G/H$.

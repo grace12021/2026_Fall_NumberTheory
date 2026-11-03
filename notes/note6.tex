@@ -1,0 +1,95 @@
+\newpage
+\section{Group Cohomology and Subgroup}
+When $L/K$ is a finite Galois extension with group $G$, we have $H^1(G, L^\times) = 0$.
+What about $H^1(G, L)$?
+Before we answer this question, we take a look at general theory of cohomology groups.
+
+\subsection{Induced and Coinduced Modules}
+Let's consider more general setting.
+Let $\alpha: R \to S$ be a ring homomorphism, and they don't have to be commutative.
+Suppose that $S$ is a projective(or free) $R$-module via $\alpha$.
+Let $M$ be an $R$-modules, and let $N, P$ be $S$-modules($R$-modules as well), and let $h: M \to N$ be an $R$-linear map.
+
+\begin{definition}[Induced and Coinduced Modules]
+    \noindent\begin{enumerate}
+        \item The \textit{induced $S$-module} $\Ind_R^S(M)$ is defined as $S \otimes_R M$.
+        \item The \textit{coinduced $S$-module} $\Coind_R^S(M)$ is defined as $\Hom_R(S, M)$.
+        We note that
+        for $f \in \Hom_R(S, N)$ and $s \in S$, we define $(s \cdot f)(t) = f(st)$ for $t \in S$.
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    There is a canonical isomorphism $$\Ext_S^i(N, \Hom_R(S, M)) \cong \Ext_R^i(N, M).$$
+\end{proposition}
+\begin{proof}
+    Let $P^\bullet \to N$ be a projective(or free resp.) resolution of $P$ as an $S$-module.
+    Then it is also a projective resolution of $N$ as an $R$-module since $S$ is a projective $R$-module.
+    So we have
+    \begin{align*}
+        \Ext_R^i(N, M) &\cong H^i(\Hom_R(P^\bullet, M)) \\
+        &\cong H^i(\Hom_S(P^\bullet, \Hom_R(S, M))) \\
+        &\cong \Ext_S^i(N, \Hom_R(S, M)).
+    \end{align*}
+\end{proof}
+
+\subsection{Group algebra and subgroup algebra}
+
+\begin{lemma}
+    Suppose that $G$ is a discrete group and $H\hookrightarrow G$ is a subgroup of finite index.
+    Then we have that $\Z[G]$ is a free $\Z[H]$-module with basis $G/H$.
+\end{lemma}
+\begin{proof}
+    We know that $\Z[H]$ is a free $\Z$-module with basis $H$,
+    and $\Z[G]$ is a free $\Z$-module with basis $G$.
+    Let $g_0 = e, g_1, \ldots, g_{n-1}$ be a set of representatives where $n = [G:H]$.
+
+    Consider a map $\Phi: \bigoplus_{i=0}^{n-1} \Z[H]\tilde{g_i} \to \Z[G]$ defined by $(h_0, h_1, \ldots, h_{n-1}) \mapsto \sum_{i=0}^{n-1} g_i h_i$.
+    It is clear $\Phi$ is surjective since every $g = hg_i$ for some $h \in H$.
+    We claim that $\Phi$ is injective as well.
+    With $g \mapsto h \tilde{g_i}$, we get a map $\Psi: \Z[G] \to \bigoplus_{i=0}^{n-1} \Z[H]\tilde{g_i}$.
+    We notice that $\Phi \circ \Psi = \mathrm{id}_{\Z[G]}$, so $\Phi$ is injective.
+\end{proof}
+
+So we can consider $R = \Z[H]$ and $S = \Z[G]$ in the previous subsection.
+We can consider the induced and coinduced module maps: $\Ind_H^G:=\Ind_R^S$ and $\Coind_H^G:=\Coind_R^S$.
+We can set $M$ to be an $H$-module, and $N$ to be $\Z$ as a trivial $G$-module.
+So the following proposition is a direct consequence of the previous proposition.
+
+\begin{proposition}[Shapiro's Lemma]
+    $$\Ext_S^i(\Z, \Coind^G_H(A)) \cong \Ext_R^i(\Z, A).$$
+\end{proposition}
+
+\begin{corollary}
+    Let $G$ be a finite group and $A$ be any abelian group.
+    Then we have $H^i(G, \Coind^G_*(A)) = A$ if $i = 0$ and $0$ otherwise
+    where $\Coind^G_*(A) = \Hom_\Z(\Z[G], A)$.
+\end{corollary}
+\begin{proof}
+    It follows from Shapiro's lemma when $H = \{e\}$.
+\end{proof}
+
+\subsection{More Discussion on Hilbert 90}
+\begin{theorem}
+    Let $L/K$ be a finite Galois extension with group $G$.
+    Then we have $H^0(G, L) = K$ and $H^i(G, L) = 0$ for all $i > 0$.
+\end{theorem}
+\begin{proof}
+    By normal basis theorem, we have some $x \in L$ such that $\{g(x)\}_{g \in G}$ is a basis of $L$ over $K$.
+    We observe $\Hom_\Z(\Z[G], K) \approx \Z[G]\underset{\Z}{\otimes} K$
+    and $K[G] \cong L$ since $\Z[G]$ is a free $\Z$-module.
+    Hence $\Coind^G_*(K) \cong L$.
+    From the previous corollary, we have $H^i(G, L) = H^i(G, \Coind^G_*(K)) = K$ if $i = 0$ and $0$ otherwise.
+\end{proof}
+
+\begin{corollary}
+    If $L/K$ is a cyclic extension with group $G = \langle \sigma \rangle$, then we have
+    an exact sequence \(0 \to K \to L \xrightarrow{\sigma - 1} L \xrightarrow{\Tr_{L/K}} K \to 0\).
+\end{corollary}
+\begin{proof}
+    The exactness at the first $L$ is clear since $\sigma(x) = x$ if and only if $x \in K$.
+    We have $0=H^1(G,L) = {}_NL /(\sigma - 1)L$,
+    and the norm map is exactly the trace map $\Tr_{L/K}$;
+    hence we have the exactness at the second $L$.
+    We also have $0 = H^2(G, L) = L^G / NL = K/\Tr_{L/K}(L)$; we have the exactness at the last $K$.
+\end{proof}
