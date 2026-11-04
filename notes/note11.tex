@@ -1,0 +1,99 @@
+\newpage
+\section{Group Cohomology for Profinite Groups}
+
+\subsection{Topological Groups}
+
+\begin{definition}[Topological Group]\noindent
+    \begin{enumerate}
+        \item A \textit{topological group} is a group $G$ equipped with a topology such that the multiplication map $G \times G \to G$, $(g, h) \mapsto gh$ and the inversion map $G \to G$, $g \mapsto g^{-1}$ are continuous.
+        \item Let $G$ and $H$ be topological groups.
+        A \textit{topological group homomorphism} is a group homomorphism $\varphi: G \to H$ which is continuous.
+        Two topological groups $G$ and $H$ are \textit{isomorphic} if they are isomorphic as groups and homeomorphic as topological spaces. 
+    \end{enumerate}
+\end{definition}
+
+\begin{example}[Examples of Topological Groups]
+    \noindent
+    \begin{enumerate}
+        \item 
+    Every group is a topological group with the discrete topology.
+        \item There are classical groups such as $\mathrm{GL}(n, \R)$ and $\mathrm{GL}(n, \C)$.
+        \item The $p$-adic Lie groups such as $\mathrm{GL}(n, \Q_p)$ and $\mathrm{GL}(n, \Z_p)$ are topological groups with the $p$-adic topology.
+        Unlike the classical groups, these groups are totally disconnected.
+    \end{enumerate}
+\end{example}
+
+Here are some useful facts about topological groups.
+\begin{theorem}
+    $G$ is metrizable if and only if it is Hausdorff and first countable.
+\end{theorem}
+\begin{theorem}Let $G$ be a topological group and $H$ be a subgroup of $G$.
+        Then the closure $\overline{H}$ of $H$ is also a subgroup of $G$.
+        Moreover, if $H$ is normal, then $\overline{H}$ is also normal.
+\end{theorem}
+\begin{theorem}
+    Let $G$ be a Hausdorff topological group and $H$ be a discrete subgroup of $G$.
+    Then $H$ is closed in $G$.
+\end{theorem}
+\begin{proof}
+    Since $H$ is discrete, we have $\{e\}$ is open in $H$ so that we can write $\{e\} = H \cap U$ for some open set $U$ in $G$.
+    Since $(x, y) \mapsto x\inverse y$ is continuous, we have $V \subset G$ open such that $e \in V$ and $V\inverse V \subset U$.
+
+    We claim that $gV \cap H$ has at most one element for any $g \in G$.
+    Suppose that $h_1, h_2 \in gV \cap H$ and we write $h_1 = gv_1$ and $h_2 = gv_2$ for some $v_1, v_2 \in V$.
+    Then we have $h_1\inverse h_2 = v_1\inverse g\inverse gv_2 = v_1\inverse v_2 \in V\inverse V \subset U$.
+    It implies that $h_1\inverse h_2 \in H \cap U = \{e\}$, so we have $h_1 = h_2$.
+
+    Now we take $g \in \overline{H}$. Since $gV$ is an open neighborhood of $g$, we have $gV \cap H \neq \emptyset$.
+    By the claim, we have $gV \cap H = \{h\}$.
+    If $g \neq h$, we have a neighborhood $W$ which doesn't have $h$.
+    Then $gV \cap W$ is an open neighborhood of $g$ which doesn't have any element in $H$, contradicting that $g \in \overline{H}$.
+    Hence $g$ must be equal to $h \in H$, so we have $\overline{H} = H$.
+\end{proof}
+
+\subsection{Profinite Group}
+
+\begin{definition}
+    [Profinite Group]
+    A \textit{profinite group} is a topological group
+    which has an inverse system of finite groups $\{G_i\}_{i \in I}$ such that
+    $G$ is isomorphic to the inverse limit $\varprojlim_{i \in I} G_i$ as topological groups
+    where the inverse system is equipped with the transition maps $\varphi_{ij}: G_j \to G_i$ for $i \le j$.
+    The \textit{inverse limit} of $\{G_i\}_{i \in I}$ is a topological space
+    $$\varprojlim_{i \in I} G_i := \left\{(g_i)_{i \in I} \in \prod_{i \in I} G_i : g_i = \varphi_{ij}(g_j) \text{ for all } i \le j\right\}$$
+    with the subspace topology from the product topology on $\prod_{i \in I} G_i$.
+\end{definition}
+
+We note that the discreteness of $G_i$ does not imply the discreteness of $G$.
+
+\begin{proposition}[Inverse limit is always closed.]
+    $G$ is closed in $G'=\prod_{i \in I} G_i$.
+\end{proposition}
+\begin{proof}
+    Let $g = (g_i)_{i \in I} \in G' \setminus G$.
+    Then there exists $\alpha<\beta$ such that $g_\alpha \neq \varphi_{\alpha\beta}(g_\beta)$.
+    Take $U_{\alpha\beta} = \{g_\alpha\} \times \{g_\beta\} \times \prod_{i \in I \setminus \{\alpha, \beta\}} G_i$.
+    Then $U_{\alpha\beta}$ is an open neighborhood of $g$ in $G'$ and $U \cap G = \emptyset$.
+    We notice that $G'\setminus G$ is the union of all such $U_{\alpha\beta}$, so it is open in $G'$.
+    Thus $G$ is closed in $G'$.
+\end{proof}
+
+\begin{proposition}
+    Let $G \hookrightarrow G'$ be as above.
+    \begin{enumerate}
+        \item $G$ is closed in $G'$.
+        \item $G$ is Hausdorff.
+        \item $G$ is compact.
+        \item $G$ is totally disconnected i.e. the connected components of $G$ are singletons.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    The first statement is proved in the previous proposition.
+    Each $G_i$ is Hausdorff, so $G'$ is Hausdorff.
+    Since $G$ is closed in $G'$, it is also Hausdorff.
+    Each $G_i$ is compact, so $G'$ is compact by Tychonoff's theorem.
+    So is $G$ since it is closed in $G'$.
+
+    Let $S \subset G$ be a connected component.
+    Then $S$ is connected in $G'$ since $G$ is closed in $G'$.
+\end{proof}
